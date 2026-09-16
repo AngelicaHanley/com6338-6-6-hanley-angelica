@@ -54,8 +54,8 @@ var questionsArr = [
 
 var score = 0
 var gameStart = false
-var btns = null
 var index = 0
+var btns = null
 var timerId = null
 var quizContainer = document.querySelector('#quiz')
 var question = document.createElement('p')
@@ -93,10 +93,6 @@ startBtn.addEventListener('click', function(){
   
   //options
   quizContainer.appendChild(optionsContainer)
-  optionsContainer.appendChild(answer1)
-  optionsContainer.appendChild(answer2)
-  optionsContainer.appendChild(answer3)
-  optionsContainer.appendChild(answer4)
 
   //1st question
   question.textContent = questionsArr[0].question
@@ -108,6 +104,13 @@ startBtn.addEventListener('click', function(){
   //timer
   quizContainer.appendChild(timerText)
   startTimer(29)
+})
+
+//DON'T want this code to run everytime startButton is pressed
+  optionsContainer.appendChild(answer1)
+  optionsContainer.appendChild(answer2)
+  optionsContainer.appendChild(answer3)
+  optionsContainer.appendChild(answer4)
 
   //getting all buttons (answer choice options)
   btns = optionsContainer.querySelectorAll('button')
@@ -117,8 +120,6 @@ startBtn.addEventListener('click', function(){
     //when an answer choice is picked...
     btns[i].addEventListener('click', function(){
       console.log("clickedButton: "+ this.textContent)
-      //getting current index of button, need later for correct answer stuff
-      var buttonIndex = Array.from(btns).indexOf(this)
       if(this.textContent === questionsArr[index].answer){
         score++
         console.log("score: "+ score)
@@ -127,7 +128,6 @@ startBtn.addEventListener('click', function(){
       nextQuestion()
     })
   }
-})
 
 //timer function (for each question)
 function startTimer(seconds) {
