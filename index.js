@@ -67,18 +67,18 @@ var answer4 = document.createElement('button')
 var timerText = document.createElement('p')
 
 //creating button on screen
-//if the user has never played the game before, the game should display a "start quiz" button
+//If the user has taken the quiz before, the app should display the previous score
 if(localStorage.getItem('previous-score')){
   var previousScore = localStorage.getItem('previous-score')
   var scoreText = document.createElement('p')
   quizContainer.appendChild(scoreText)
   scoreText.textContent="Previous Score: "+ previousScore+"%"
 }
+//displaying the start quiz button
 var startBtn = document.createElement('button')
 quizContainer.appendChild(startBtn)
 startBtn.setAttribute('id','start-quiz')
 startBtn.textContent = "Start Quiz!"
-//If the user has taken the quiz before, the app should display the previous score
 
 //setting screen to 1st question when start button is clicked
 startBtn.addEventListener('click', function(){
@@ -94,7 +94,7 @@ startBtn.addEventListener('click', function(){
   //options
   quizContainer.appendChild(optionsContainer)
 
-  //1st question
+  //1st question and answer choices
   question.textContent = questionsArr[0].question
   answer1.textContent = questionsArr[0].options[0]
   answer2.textContent = questionsArr[0].options[1]
@@ -115,7 +115,7 @@ startBtn.addEventListener('click', function(){
   //getting all buttons (answer choice options)
   btns = optionsContainer.querySelectorAll('button')
 
-  //checking when an answer button is clicked
+  //checking when an answer button is clicked, event listener
   for(var i=0; i<btns.length;i++){
     //when an answer choice is picked...
     btns[i].addEventListener('click', function(){
@@ -165,7 +165,7 @@ function nextQuestion(){
     quizContainer.removeChild(optionsContainer)
     quizContainer.removeChild(timerText)
     quizContainer.appendChild(scoreText)
-    //updating score
+    //updating score and resetting variables
     score = Math.round(((score/questionsArr.length)*100))
     localStorage.setItem('previous-score', score)
     scoreText.textContent="Previous Score: "+ score+"%"
