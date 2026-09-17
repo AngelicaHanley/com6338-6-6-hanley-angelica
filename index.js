@@ -65,12 +65,12 @@ var answer2 = document.createElement('button')
 var answer3 = document.createElement('button')
 var answer4 = document.createElement('button')
 var timerText = document.createElement('p')
+var scoreText = document.createElement('p')
 
 //creating button on screen
 //If the user has taken the quiz before, the app should display the previous score
 if(localStorage.getItem('previous-score')){
   var previousScore = localStorage.getItem('previous-score')
-  var scoreText = document.createElement('p')
   quizContainer.appendChild(scoreText)
   scoreText.textContent="Previous Score: "+ previousScore+"%"
 }
